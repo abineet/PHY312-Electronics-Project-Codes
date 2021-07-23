@@ -9,13 +9,13 @@ def input(t, f_l):
     return f
 
 def output(x, f_l, f_s, W, A):
-    f = np.cos( A*W*2*np.pi*f_s*np.sin(2*np.pi*f_s*x) - (2*np.pi*f_l*x) )
+    f = np.cos( A*W*2*np.pi*f_l*np.sin(2*np.pi*f_s*x) - (2*np.pi*f_l*x) )
     return f
 
-a = 10
+a = 2e-5
 c = 3e8
-f_l0 = 0.5e14
-f_s0 = 1e9
+f_l0 = 5e14
+f_s0 = 5e9
 W0 = 0.01
 N = int(1e6)
 T = 1.0/(2*(f_l0+10*f_s0))
@@ -34,8 +34,8 @@ lsignal, = ax[1].plot(t,output(t, f_l0, f_s0, W0, a/c), label = 'Output Signal',
 lftrans, = ax[2].plot(v, ft, label = 'Fourier Transform')
 
 ax[2].set_xlim((f_l0-10*f_s0, f_l0+10*f_s0))
-ax[2].set(xlabel = 'Frequency (1e13 Hz)')
-ax[1].set(xlabel = 'time (1e-14 sec)', ylabel = 'Electric field normalised')
+ax[2].set(xlabel = 'Frequency (units of 1e11 Hz, centered at 5e14 Hz)')
+ax[1].set(xlabel = 'time (1e-15 sec)', ylabel = 'Electric field normalised')
 ax[0].set(ylabel = 'Electric field normalised')
 for i in range(3):
     ax[i].grid()
@@ -47,13 +47,13 @@ axfreqS = pl.axes([0.25, 0.06, 0.65, 0.03], facecolor=axcolor)
 axWidth = pl.axes([0.25, 0.10, 0.65, 0.03], facecolor=axcolor)
 
 sdfreqL = Slider(axdfreqL, 'Change Freq Light (GHz)', -5, 5, valinit=0)
-sfreqS = Slider(axfreqS, 'Freq Sound (GHz)', 0, 10.0, valinit=1)
+sfreqS = Slider(axfreqS, 'Freq Sound (GHz)', 0, 10.0, valinit=5)
 sWidth = Slider(axWidth, 'Width (cm)', 0, 2.0, valinit=1)
 
 def update(val):
-    f_l = sdfreqL.val*f_s0+f_l0
-    f_s = sfreqS.val*f_s0
-    W = sWidth.val*W0
+    f_l = sdfreqL.val*1e9+f_l0
+    f_s = sfreqS.val*1e9
+    W = sWidth.val*1e-2
 
     T = 1.0/(2*(f_l+10*f_s))
 
