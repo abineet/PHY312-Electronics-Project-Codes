@@ -9,11 +9,12 @@ def input(t, f_l):
     return f
 
 def output(x, f_l, f_s, W, A):
-    f = np.cos( A*W*2*np.pi*f_l*np.sin(2*np.pi*f_s*x) - (2*np.pi*f_l*x) )
+    f = np.cos( A*W*2*np.pi*f_l*np.sin(2*np.pi*f_s*x) - (2*np.pi*f_l*x) + W*2*np.pi*f_l*n/c)
     return f
 
 a = 2e-5
 c = 3e8
+n = 4/3.0
 f_l0 = 5e14
 f_s0 = 5e9
 W0 = 0.01

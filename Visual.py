@@ -8,9 +8,10 @@ def input(t, f_l):
     return f
 
 def output(x, f_l, f_s, W, A):
-    f = np.cos( A*W*2*np.pi*f_s*np.sin(2*np.pi*f_s*x) - (2*np.pi*f_l*x) )
+    f = np.cos( A*W*2*np.pi*f_s*np.sin(2*np.pi*f_s*x) - (2*np.pi*f_l*x) + W*2*np.pi*f_l*n/c)
     return f
 
+n = 1
 a = 1
 c = 1
 f_l = 1
